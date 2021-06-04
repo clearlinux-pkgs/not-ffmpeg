@@ -136,6 +136,7 @@ libavcodec.so.58:avcodec_decode_video2
 libavcodec.so.58:avcodec_default_execute
 libavcodec.so.58:avcodec_default_execute2
 libavcodec.so.58:avcodec_default_get_buffer2
+libavcodec.so.58:avcodec_default_get_encode_buffer
 libavcodec.so.58:avcodec_default_get_format
 libavcodec.so.58:avcodec_descriptor_get
 libavcodec.so.58:avcodec_descriptor_get_by_name
@@ -189,7 +190,6 @@ libavcodec.so.58:avpicture_get_size
 libavcodec.so.58:avpicture_layout
 libavcodec.so.58:avpriv_ac3_parse_header
 libavcodec.so.58:avpriv_align_put_bits
-libavcodec.so.58:avpriv_bprint_to_extradata
 libavcodec.so.58:avpriv_codec_get_cap_skip_frame_fill_param
 libavcodec.so.58:avpriv_copy_bits
 libavcodec.so.58:avpriv_dnxhd_get_frame_size
@@ -200,8 +200,11 @@ libavcodec.so.58:avpriv_find_pix_fmt
 libavcodec.so.58:avpriv_find_start_code
 libavcodec.so.58:avpriv_get_raw_pix_fmt_tags
 libavcodec.so.58:avpriv_mpeg4audio_get_config
+libavcodec.so.58:avpriv_mpeg4audio_get_config2
 libavcodec.so.58:avpriv_mpegaudio_decode_header
-libavcodec.so.58:avpriv_put_string
+libavcodec.so.58:avpriv_packet_list_free
+libavcodec.so.58:avpriv_packet_list_get
+libavcodec.so.58:avpriv_packet_list_put
 libavcodec.so.58:avpriv_split_xiph_headers
 libavcodec.so.58:avpriv_toupper4
 libavcodec.so.58:avsubtitle_free
@@ -254,7 +257,6 @@ libavfilter.so.7:avfilter_configuration
 libavfilter.so.7:avfilter_free
 libavfilter.so.7:avfilter_get_by_name
 libavfilter.so.7:avfilter_get_class
-libavfilter.so.7:avfilter_get_matrix
 libavfilter.so.7:avfilter_graph_alloc
 libavfilter.so.7:avfilter_graph_alloc_filter
 libavfilter.so.7:avfilter_graph_config
@@ -422,7 +424,9 @@ libavformat.so.58:avio_open2
 libavformat.so.58:avio_open_dir
 libavformat.so.58:avio_open_dyn_buf
 libavformat.so.58:avio_pause
+libavformat.so.58:avio_print_string_array
 libavformat.so.58:avio_printf
+libavformat.so.58:avio_protocol_get_class
 libavformat.so.58:avio_put_str
 libavformat.so.58:avio_put_str16be
 libavformat.so.58:avio_put_str16le
@@ -520,12 +524,14 @@ libavutil.so.56:av_buffer_get_opaque
 libavutil.so.56:av_buffer_get_ref_count
 libavutil.so.56:av_buffer_is_writable
 libavutil.so.56:av_buffer_make_writable
+libavutil.so.56:av_buffer_pool_buffer_get_opaque
 libavutil.so.56:av_buffer_pool_get
 libavutil.so.56:av_buffer_pool_init
 libavutil.so.56:av_buffer_pool_init2
 libavutil.so.56:av_buffer_pool_uninit
 libavutil.so.56:av_buffer_realloc
 libavutil.so.56:av_buffer_ref
+libavutil.so.56:av_buffer_replace
 libavutil.so.56:av_buffer_unref
 libavutil.so.56:av_calloc
 libavutil.so.56:av_camellia_alloc
@@ -578,6 +584,7 @@ libavutil.so.56:av_display_rotation_get
 libavutil.so.56:av_display_rotation_set
 libavutil.so.56:av_div_i
 libavutil.so.56:av_div_q
+libavutil.so.56:av_dovi_alloc
 libavutil.so.56:av_downmix_info_update_side_data
 libavutil.so.56:av_dynamic_hdr_plus_alloc
 libavutil.so.56:av_dynamic_hdr_plus_create_side_data
@@ -594,6 +601,8 @@ libavutil.so.56:av_encryption_init_info_alloc
 libavutil.so.56:av_encryption_init_info_free
 libavutil.so.56:av_encryption_init_info_get_side_data
 libavutil.so.56:av_escape
+libavutil.so.56:av_expr_count_func
+libavutil.so.56:av_expr_count_vars
 libavutil.so.56:av_expr_eval
 libavutil.so.56:av_expr_free
 libavutil.so.56:av_expr_parse
@@ -617,6 +626,8 @@ libavutil.so.56:av_fifo_size
 libavutil.so.56:av_fifo_space
 libavutil.so.56:av_file_map
 libavutil.so.56:av_file_unmap
+libavutil.so.56:av_film_grain_params_alloc
+libavutil.so.56:av_film_grain_params_create_side_data
 libavutil.so.56:av_find_best_pix_fmt_of_2
 libavutil.so.56:av_find_info_tag
 libavutil.so.56:av_find_nearest_q_idx
@@ -668,6 +679,7 @@ libavutil.so.56:av_frame_unref
 libavutil.so.56:av_free
 libavutil.so.56:av_freep
 libavutil.so.56:av_gcd
+libavutil.so.56:av_gcd_q
 libavutil.so.56:av_get_alt_sample_fmt
 libavutil.so.56:av_get_bits_per_pixel
 libavutil.so.56:av_get_bytes_per_sample
@@ -721,6 +733,7 @@ libavutil.so.56:av_hmac_update
 libavutil.so.56:av_hwdevice_ctx_alloc
 libavutil.so.56:av_hwdevice_ctx_create
 libavutil.so.56:av_hwdevice_ctx_create_derived
+libavutil.so.56:av_hwdevice_ctx_create_derived_opts
 libavutil.so.56:av_hwdevice_ctx_init
 libavutil.so.56:av_hwdevice_find_type_by_name
 libavutil.so.56:av_hwdevice_get_hwframe_constraints
@@ -748,6 +761,7 @@ libavutil.so.56:av_image_fill_arrays
 libavutil.so.56:av_image_fill_black
 libavutil.so.56:av_image_fill_linesizes
 libavutil.so.56:av_image_fill_max_pixsteps
+libavutil.so.56:av_image_fill_plane_sizes
 libavutil.so.56:av_image_fill_pointers
 libavutil.so.56:av_image_get_buffer_size
 libavutil.so.56:av_image_get_linesize
@@ -764,6 +778,7 @@ libavutil.so.56:av_log_format_line
 libavutil.so.56:av_log_format_line2
 libavutil.so.56:av_log_get_flags
 libavutil.so.56:av_log_get_level
+libavutil.so.56:av_log_once
 libavutil.so.56:av_log_set_callback
 libavutil.so.56:av_log_set_flags
 libavutil.so.56:av_log_set_level
@@ -793,6 +808,7 @@ libavutil.so.56:av_murmur3_init
 libavutil.so.56:av_murmur3_init_seeded
 libavutil.so.56:av_murmur3_update
 libavutil.so.56:av_nearer_q
+libavutil.so.56:av_opt_child_class_iterate
 libavutil.so.56:av_opt_child_class_next
 libavutil.so.56:av_opt_child_next
 libavutil.so.56:av_opt_copy
@@ -937,11 +953,14 @@ libavutil.so.56:av_thread_message_queue_set_err_send
 libavutil.so.56:av_thread_message_queue_set_free_func
 libavutil.so.56:av_timecode_adjust_ntsc_framenum2
 libavutil.so.56:av_timecode_check_frame_rate
+libavutil.so.56:av_timecode_get_smpte
 libavutil.so.56:av_timecode_get_smpte_from_framenum
 libavutil.so.56:av_timecode_init
+libavutil.so.56:av_timecode_init_from_components
 libavutil.so.56:av_timecode_init_from_string
 libavutil.so.56:av_timecode_make_mpeg_tc_string
 libavutil.so.56:av_timecode_make_smpte_tc_string
+libavutil.so.56:av_timecode_make_smpte_tc_string2
 libavutil.so.56:av_timecode_make_string
 libavutil.so.56:av_timegm
 libavutil.so.56:av_tree_destroy
@@ -958,6 +977,8 @@ libavutil.so.56:av_usleep
 libavutil.so.56:av_utf8_decode
 libavutil.so.56:av_vbprintf
 libavutil.so.56:av_version_info
+libavutil.so.56:av_video_enc_params_alloc
+libavutil.so.56:av_video_enc_params_create_side_data
 libavutil.so.56:av_vlog
 libavutil.so.56:av_write_image_line
 libavutil.so.56:av_write_image_line2

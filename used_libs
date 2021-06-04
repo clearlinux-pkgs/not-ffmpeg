@@ -3,7 +3,7 @@ libass.so.9
 libbz2.so.1.0
 libc.so.6
 libcrypto.so.1.1
-libdav1d.so.3
+libdav1d.so.5
 libm.so.6
 libmfx.so.1
 libpthread.so.0

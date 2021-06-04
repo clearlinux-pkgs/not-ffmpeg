@@ -1,8 +1,4 @@
 0001-configure-do-not-die-if-unknown-option-is-found.patch
-0001-not-ffmpeg-fixes-to-compilation-for-n-4.2.1-version.patch
+0001-not-ffmpeg-fixes-to-compilation-for-n-4.4-version.patch
 0001-not-ffmpeg-enable-h264_qsv-encoder-and-decoder.patch
 0001-add-fixes-for-demuxers-dnxhd-to-enable-mp4.patch
-0005-lavx_qsv-Fix_MSDK_initialization_failure_in_system_memory.patch
-CVE-2019-15942.patch
-CVE-2020-12284.patch
-CVE-2020-13904.patch

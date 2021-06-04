@@ -16,6 +16,7 @@ the files restored should be erased from remove_files.clearlinux before
 running reduced.sh script
 
 Signed-off-by: Daniel Charles <daniel.charles@intel.com>
+Signed-off-by: Mark Horn <mark.d.horn@intel.com>
 ---
  libavcodec/Makefile      |   3 +-
  libavcodec/h264_parser.c |   1 -
@@ -47,11 +48,11 @@ index 44425c3296..1f5d5b99bb 100644
  OBJS-$(CONFIG_FIC_DECODER)             += fic.o
  OBJS-$(CONFIG_GIF_DECODER)             += gifdec.o lzw.o
  OBJS-$(CONFIG_GIF_ENCODER)             += gif.o lzwenc.o
-+OBJS-$(CONFIG_H264_QSV_DECODER)        += qsvdec_h2645.o
++OBJS-$(CONFIG_H264_QSV_DECODER)        += qsvdec.o
 +OBJS-$(CONFIG_H264_QSV_ENCODER)        += qsvenc_h264.o
+ OBJS-$(CONFIG_H264_MF_ENCODER)         += mfenc.o mf_utils.o
  OBJS-$(CONFIG_H264_VAAPI_ENCODER)      += vaapi_encode_h264.o h264_levels.o
  OBJS-$(CONFIG_HCOM_DECODER)            += hcom.o
- OBJS-$(CONFIG_HEVC_VAAPI_ENCODER)      += vaapi_encode_h265.o h265_profile_level.o
 diff --git a/libavcodec/h264_parser.c b/libavcodec/h264_parser.c
 index 5f9a9c46ef..640ac75a82 100644
 --- a/libavcodec/h264_parser.c
