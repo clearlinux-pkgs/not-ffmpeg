@@ -2,3 +2,6 @@
 0001-not-ffmpeg-fixes-to-compilation-for-n-4.4-version.patch
 0001-not-ffmpeg-enable-h264_qsv-encoder-and-decoder.patch
 0001-add-fixes-for-demuxers-dnxhd-to-enable-mp4.patch
+CVE-2020-22015.patch
+CVE-2020-22019.patch
+CVE-2020-22021.patch
