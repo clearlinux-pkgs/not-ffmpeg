@@ -4,7 +4,7 @@
 #
 Name     : not-ffmpeg
 Version  : 4.4.reduced
-Release  : 47
+Release  : 48
 URL      : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4-reduced.tar.xz
 Source0  : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4-reduced.tar.xz
 Summary  : No detailed summary available
@@ -97,13 +97,16 @@ cd %{_builddir}/ffmpeg-4.4-reduced
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+pushd ..
+cp -a ffmpeg-4.4-reduced buildavx512
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1623097897
+export SOURCE_DATE_EPOCH=1628700956
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
@@ -156,12 +159,69 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-re
 --enable-libdav1d
 make  %{?_smp_mflags}
 
+unset PKG_CONFIG_PATH
+pushd ../buildavx512/
+export CFLAGS="$CFLAGS -m64 -march=skylake-avx512 -mprefer-vector-width=256"
+export CXXFLAGS="$CXXFLAGS -m64 -march=skylake-avx512 -mprefer-vector-width=256"
+export FFLAGS="$FFLAGS -m64 -march=skylake-avx512 -mprefer-vector-width=256"
+export FCFLAGS="$FCFLAGS -m64 -march=skylake-avx512 -mprefer-vector-width=256"
+export LDFLAGS="$LDFLAGS -m64 -march=skylake-avx512"
+%configure --disable-static --extra-ldflags='-ldl' \
+--disable-everything \
+--enable-avcodec \
+--enable-avformat \
+--enable-avutil \
+--enable-avdevice \
+--enable-rdft \
+--enable-pixelutils \
+--enable-libvorbis \
+--enable-libvpx \
+--enable-muxer="crc,image2,jpeg,ogg,md5,nut,webm,webm_chunk,webm_dash_manifest,rawvideo,ivf,null,wav,framecrc,rtp,rtsp,ass,webvtt,mjpeg,framehash,hash,mp4,avi" \
+--enable-bsf="mp3_header_decompress,vp9_superframe" \
+--enable-demuxer="mjpeg,image2,webm_dash_manifest,ogg,matroska,mp3,pcm_s16le,rawvideo,wav,mov,ivf,rtp,rtsp,flv,ass,subviewer,subviewer1,webvtt,h264,dnxhd,avi" \
+--enable-decoder="rawvideo,libvorbis,mjpeg,jpeg,opus,mp3,pcm_u8,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_s16be,pcm_s24be,pcm_mulaw,pcm_alaw,pcm_u24le,pcm_u32be,pcm_u32le,pgm,pgmyuv,libvpx_vp8,vp8_qsv,vp8,libvpx_vp9,vp9,tiff,bmp,wavpack,ass,saa,subviewer,subviewer1,webvtt,h264_qsv,yuv4,libdav1d" \
+--enable-encoder="rawvideo,wrapped_avframe,libvorbis,opus,yuv4,tiff,bmp,libvpx_vp8,vp8_vaapi,libvpx_vp9,vp9_vaapi,mjpeg_vaapi,pcm_u8,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_s16be,pcm_s24be,pcm_mulaw,pcm_alaw,pcm_u24le,pcm_u32be,pcm_u32le,ass,ssa,webvtt,mjpeg_qsv,h264_qsv,libtheora" \
+--enable-hwaccel="vp8_vaapi,vp9_vaapi,mjpeg_vaapi" \
+--enable-parser="opus,libvorbis,vp3,vp8,vp9,mjpeg" \
+--enable-protocol="file,md5,pipe,rtp,tcp,http,https,httpproxy,ftp,librtmp,librtmpe,librtmps,librtmpt,librtmpte,rtmpe,rtmps,rtmpt,rtmpte,rtmpts" \
+--enable-filter="acopy,aresample,ashowinfo,aselect,asetpts,copy,denoise_vaapi,deinterlace_vaapi,hwmap,hwupload,hwdownload,pixdesctest,procamp_vaapi,scale,scale_vaapi,sharpness_vaapi,showinfo,color,format,subtitles,select,setpts" \
+--disable-error-resilience \
+--enable-pic \
+--enable-shared \
+--enable-swscale \
+--enable-avfilter \
+--enable-vaapi \
+--enable-libmfx \
+--disable-xvmc \
+--disable-doc \
+--disable-htmlpages \
+--enable-version3 \
+--disable-mmx \
+--disable-mmxext \
+--disable-programs \
+--enable-ffmpeg \
+--enable-ffplay \
+--enable-sdl2 \
+--enable-network \
+--enable-openssl \
+--enable-librtmp \
+--enable-libv4l2 \
+--enable-indev="v4l2" \
+--enable-outdev="sdl2" \
+--enable-libass \
+--enable-libtheora \
+--enable-libdav1d
+make  %{?_smp_mflags}
+popd
 %install
-export SOURCE_DATE_EPOCH=1623097897
+export SOURCE_DATE_EPOCH=1628700956
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/not-ffmpeg
 cp %{_builddir}/ffmpeg-4.4-reduced/COPYING.LGPLv2.1 %{buildroot}/usr/share/package-licenses/not-ffmpeg/37d2f1d62fec4da0caf06e5da21afc3521b597aa
 cp %{_builddir}/ffmpeg-4.4-reduced/COPYING.LGPLv3 %{buildroot}/usr/share/package-licenses/not-ffmpeg/f45ee1c765646813b442ca58de72e20a64a7ddba
+pushd ../buildavx512/
+%make_install_avx512
+popd
 %make_install
 
 %files
@@ -171,6 +231,8 @@ cp %{_builddir}/ffmpeg-4.4-reduced/COPYING.LGPLv3 %{buildroot}/usr/share/package
 %defattr(-,root,root,-)
 /usr/bin/ffmpeg
 /usr/bin/ffplay
+/usr/bin/haswell/avx512_1/ffmpeg
+/usr/bin/haswell/avx512_1/ffplay
 
 %files data
 %defattr(-,root,root,-)
@@ -332,6 +394,11 @@ cp %{_builddir}/ffmpeg-4.4-reduced/COPYING.LGPLv3 %{buildroot}/usr/share/package
 /usr/include/libswresample/version.h
 /usr/include/libswscale/swscale.h
 /usr/include/libswscale/version.h
+/usr/lib64/haswell/avx512_1/libavcodec.so
+/usr/lib64/haswell/avx512_1/libavfilter.so
+/usr/lib64/haswell/avx512_1/libavformat.so
+/usr/lib64/haswell/avx512_1/libavutil.so
+/usr/lib64/haswell/avx512_1/libswscale.so
 /usr/lib64/libavcodec.so
 /usr/lib64/libavdevice.so
 /usr/lib64/libavfilter.so
@@ -349,6 +416,16 @@ cp %{_builddir}/ffmpeg-4.4-reduced/COPYING.LGPLv3 %{buildroot}/usr/share/package
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/haswell/avx512_1/libavcodec.so.58
+/usr/lib64/haswell/avx512_1/libavcodec.so.58.134.100
+/usr/lib64/haswell/avx512_1/libavfilter.so.7
+/usr/lib64/haswell/avx512_1/libavfilter.so.7.110.100
+/usr/lib64/haswell/avx512_1/libavformat.so.58
+/usr/lib64/haswell/avx512_1/libavformat.so.58.76.100
+/usr/lib64/haswell/avx512_1/libavutil.so.56
+/usr/lib64/haswell/avx512_1/libavutil.so.56.70.100
+/usr/lib64/haswell/avx512_1/libswscale.so.5
+/usr/lib64/haswell/avx512_1/libswscale.so.5.9.100
 /usr/lib64/libavcodec.so.58
 /usr/lib64/libavcodec.so.58.134.100
 /usr/lib64/libavdevice.so.58
