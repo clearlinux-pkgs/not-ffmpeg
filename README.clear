@@ -1,16 +1,13 @@
-App using non-ffmpeg
-mpv
-obs-studio
-qt-engine (don't care)
-vlc
+App using not-ffmpeg
+$ make whatrequires | awk '{ print $3 }' | sort -ud
 alsa-plugins
 cmus
 digikam
 FreeRDP
 gegl
-gtk4
 kfilemetadata
 libplacebo
+mlt
 mpv
 obs-studio
 oiio
