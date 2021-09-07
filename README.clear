@@ -1,0 +1,21 @@
+App using non-ffmpeg
+mpv
+obs-studio
+qt-engine (don't care)
+vlc
+alsa-plugins
+cmus
+digikam
+FreeRDP
+gegl
+gtk4
+kfilemetadata
+libplacebo
+mpv
+obs-studio
+oiio
+qtwebengine
+simplescreenrecorder
+tracker-miners
+vlc
+wlroots

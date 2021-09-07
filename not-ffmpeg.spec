@@ -4,7 +4,7 @@
 #
 Name     : not-ffmpeg
 Version  : 4.4.reduced
-Release  : 49
+Release  : 50
 URL      : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4-reduced.tar.xz
 Source0  : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4-reduced.tar.xz
 Summary  : No detailed summary available
@@ -33,6 +33,8 @@ Patch4: 0001-add-fixes-for-demuxers-dnxhd-to-enable-mp4.patch
 Patch5: CVE-2020-22015.patch
 Patch6: CVE-2020-22019.patch
 Patch7: CVE-2020-22021.patch
+Patch8: CVE-2021-38171.patch
+Patch9: CVE-2021-38291.patch
 
 %description
 FFmpeg is a collection of libraries and tools to process multimedia content
@@ -97,6 +99,8 @@ cd %{_builddir}/ffmpeg-4.4-reduced
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
+%patch9 -p1
 pushd ..
 cp -a ffmpeg-4.4-reduced buildavx512
 popd
@@ -106,7 +110,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1628701906
+export SOURCE_DATE_EPOCH=1631040597
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -217,7 +221,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=skylake-avx512"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1628701906
+export SOURCE_DATE_EPOCH=1631040597
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/not-ffmpeg
 cp %{_builddir}/ffmpeg-4.4-reduced/COPYING.LGPLv2.1 %{buildroot}/usr/share/package-licenses/not-ffmpeg/37d2f1d62fec4da0caf06e5da21afc3521b597aa
