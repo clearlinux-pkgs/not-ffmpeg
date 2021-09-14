@@ -4,7 +4,7 @@
 #
 Name     : not-ffmpeg
 Version  : 4.4.reduced
-Release  : 50
+Release  : 51
 URL      : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4-reduced.tar.xz
 Source0  : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4-reduced.tar.xz
 Summary  : No detailed summary available
@@ -110,7 +110,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1631040597
+export SOURCE_DATE_EPOCH=1631640782
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -127,6 +127,7 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-st
 --enable-avdevice \
 --enable-rdft \
 --enable-pixelutils \
+--enable-libopus \
 --enable-libvorbis \
 --enable-libvpx \
 --enable-muxer="crc,image2,jpeg,ogg,md5,nut,webm,webm_chunk,webm_dash_manifest,rawvideo,ivf,null,wav,framecrc,rtp,rtsp,ass,webvtt,mjpeg,framehash,hash,mp4,avi" \
@@ -181,6 +182,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=skylake-avx512"
 --enable-avdevice \
 --enable-rdft \
 --enable-pixelutils \
+--enable-libopus \
 --enable-libvorbis \
 --enable-libvpx \
 --enable-muxer="crc,image2,jpeg,ogg,md5,nut,webm,webm_chunk,webm_dash_manifest,rawvideo,ivf,null,wav,framecrc,rtp,rtsp,ass,webvtt,mjpeg,framehash,hash,mp4,avi" \
@@ -221,7 +223,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=skylake-avx512"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1631040597
+export SOURCE_DATE_EPOCH=1631640782
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/not-ffmpeg
 cp %{_builddir}/ffmpeg-4.4-reduced/COPYING.LGPLv2.1 %{buildroot}/usr/share/package-licenses/not-ffmpeg/37d2f1d62fec4da0caf06e5da21afc3521b597aa
