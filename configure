@@ -6,6 +6,7 @@
 --enable-avdevice
 --enable-rdft
 --enable-pixelutils
+--enable-libopus
 --enable-libvorbis
 --enable-libvpx
 --enable-muxer="crc,image2,jpeg,ogg,md5,nut,webm,webm_chunk,webm_dash_manifest,rawvideo,ivf,null,wav,framecrc,rtp,rtsp,ass,webvtt,mjpeg,framehash,hash,mp4,avi"
