@@ -14,7 +14,7 @@ diff --git a/configure b/configure
 index 7310b962f2..cb183fb986 100755
 --- a/configure
 +++ b/configure
-@@ -3778,7 +3778,7 @@ enable $ARCH_EXT_LIST
+@@ -3966,7 +3966,7 @@ enable $ARCH_EXT_LIST
  die_unknown(){
      echo "Unknown option \"$1\"."
      echo "See $0 --help for available options."

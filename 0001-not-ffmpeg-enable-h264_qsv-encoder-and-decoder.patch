@@ -36,7 +36,7 @@ diff --git a/libavcodec/Makefile b/libavcodec/Makefile
 index 44425c3296..1f5d5b99bb 100644
 --- a/libavcodec/Makefile
 +++ b/libavcodec/Makefile
-@@ -82,7 +82,6 @@ OBJS-$(CONFIG_FMTCONVERT)              += fmtconvert.o
+@@ -89,7 +89,6 @@ OBJS-$(CONFIG_FMTCONVERT)              += fmtconvert.o
  OBJS-$(CONFIG_GOLOMB)                  += golomb.o
  OBJS-$(CONFIG_H263DSP)                 += h263dsp.o
  OBJS-$(CONFIG_H264CHROMA)              += h264chroma.o
@@ -44,20 +44,20 @@ index 44425c3296..1f5d5b99bb 100644
  OBJS-$(CONFIG_H264PARSE)               += h264_parse.o h2645_parse.o h264_ps.o
  OBJS-$(CONFIG_H264PRED)                += h264pred.o
  OBJS-$(CONFIG_H264QPEL)                += h264qpel.o
-@@ -188,6 +187,8 @@ OBJS-$(CONFIG_DVAUDIO_DECODER)         += dvaudiodec.o
- OBJS-$(CONFIG_FIC_DECODER)             += fic.o
+@@ -210,6 +209,8 @@ OBJS-$(CONFIG_FLV_DECODER)             += flvdec.o
+ OBJS-$(CONFIG_FLV_ENCODER)             += flvenc.o
  OBJS-$(CONFIG_GIF_DECODER)             += gifdec.o lzw.o
  OBJS-$(CONFIG_GIF_ENCODER)             += gif.o lzwenc.o
 +OBJS-$(CONFIG_H264_QSV_DECODER)        += qsvdec.o
 +OBJS-$(CONFIG_H264_QSV_ENCODER)        += qsvenc_h264.o
  OBJS-$(CONFIG_H264_MF_ENCODER)         += mfenc.o mf_utils.o
  OBJS-$(CONFIG_H264_VAAPI_ENCODER)      += vaapi_encode_h264.o h264_levels.o
- OBJS-$(CONFIG_HCOM_DECODER)            += hcom.o
+ OBJS-$(CONFIG_HCA_DECODER)             += hcadec.o
 diff --git a/libavcodec/h264_parser.c b/libavcodec/h264_parser.c
 index 5f9a9c46ef..640ac75a82 100644
 --- a/libavcodec/h264_parser.c
 +++ b/libavcodec/h264_parser.c
-@@ -701,7 +701,6 @@ static av_cold int init(AVCodecParserContext *s)
+@@ -698,7 +698,6 @@ static av_cold int init(AVCodecParserContext *s)
  
      p->reference_dts = AV_NOPTS_VALUE;
      p->last_frame_num = INT_MAX;
