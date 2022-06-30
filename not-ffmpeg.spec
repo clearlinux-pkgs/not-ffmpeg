@@ -4,7 +4,7 @@
 #
 Name     : not-ffmpeg
 Version  : 4.4.1.reduced
-Release  : 56
+Release  : 57
 URL      : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4.1-reduced.tar.xz
 Source0  : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4.1-reduced.tar.xz
 Summary  : No detailed summary available
@@ -114,15 +114,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1647924008
+export SOURCE_DATE_EPOCH=1656549597
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
 %configure --disable-static --extra-ldflags='-ldl' \
 --disable-everything \
 --enable-avcodec \
@@ -282,7 +282,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v4"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1647924008
+export SOURCE_DATE_EPOCH=1656549597
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/not-ffmpeg
 cp %{_builddir}/ffmpeg-4.4.1-reduced/COPYING.LGPLv2.1 %{buildroot}/usr/share/package-licenses/not-ffmpeg/37d2f1d62fec4da0caf06e5da21afc3521b597aa
@@ -294,8 +294,8 @@ pushd ../buildavx512/
 %make_install_v4
 popd
 %make_install
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
-/usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -466,6 +466,20 @@ popd
 /usr/include/libswresample/version.h
 /usr/include/libswscale/swscale.h
 /usr/include/libswscale/version.h
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavcodec.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavdevice.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavfilter.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavformat.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavutil.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libswresample.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libswscale.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavcodec.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavdevice.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavfilter.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavformat.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavutil.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libswresample.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libswscale.so
 /usr/lib64/libavcodec.so
 /usr/lib64/libavdevice.so
 /usr/lib64/libavfilter.so
@@ -487,6 +501,34 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavcodec.so.58
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavcodec.so.58.134.100
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavdevice.so.58
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavdevice.so.58.13.100
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavfilter.so.7
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavfilter.so.7.110.100
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavformat.so.58
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavformat.so.58.76.100
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavutil.so.56
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavutil.so.56.70.100
+/usr/lib64/glibc-hwcaps/x86-64-v3/libswresample.so.3
+/usr/lib64/glibc-hwcaps/x86-64-v3/libswresample.so.3.9.100
+/usr/lib64/glibc-hwcaps/x86-64-v3/libswscale.so.5
+/usr/lib64/glibc-hwcaps/x86-64-v3/libswscale.so.5.9.100
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavcodec.so.58
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavcodec.so.58.134.100
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavdevice.so.58
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavdevice.so.58.13.100
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavfilter.so.7
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavfilter.so.7.110.100
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavformat.so.58
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavformat.so.58.76.100
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavutil.so.56
+/usr/lib64/glibc-hwcaps/x86-64-v4/libavutil.so.56.70.100
+/usr/lib64/glibc-hwcaps/x86-64-v4/libswresample.so.3
+/usr/lib64/glibc-hwcaps/x86-64-v4/libswresample.so.3.9.100
+/usr/lib64/glibc-hwcaps/x86-64-v4/libswscale.so.5
+/usr/lib64/glibc-hwcaps/x86-64-v4/libswscale.so.5.9.100
 /usr/lib64/libavcodec.so.58
 /usr/lib64/libavcodec.so.58.134.100
 /usr/lib64/libavdevice.so.58
@@ -501,7 +543,6 @@ popd
 /usr/lib64/libswresample.so.3.9.100
 /usr/lib64/libswscale.so.5
 /usr/lib64/libswscale.so.5.9.100
-/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)
