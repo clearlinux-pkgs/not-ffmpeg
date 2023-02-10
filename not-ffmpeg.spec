@@ -4,7 +4,7 @@
 #
 Name     : not-ffmpeg
 Version  : 4.4.1.reduced
-Release  : 64
+Release  : 65
 URL      : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4.1-reduced.tar.xz
 Source0  : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4.1-reduced.tar.xz
 Summary  : No detailed summary available
@@ -27,10 +27,14 @@ BuildRequires : pkgconfig(sdl2)
 BuildRequires : pkgconfig(vorbis)
 BuildRequires : pkgconfig(vpx)
 BuildRequires : rtmpdump-dev
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 Patch1: 0001-configure-do-not-die-if-unknown-option-is-found.patch
 Patch2: 0001-not-ffmpeg-fixes-to-compilation-for-n-4.4-version.patch
 Patch3: 0001-not-ffmpeg-enable-h264_qsv-encoder-and-decoder.patch
 Patch4: 0001-add-fixes-for-demuxers-dnxhd-to-enable-mp4.patch
+Patch5: 0001-Fix-sdl2-version-check.patch
 
 %description
 FFmpeg is a collection of libraries and tools to process multimedia content
@@ -102,6 +106,7 @@ cd %{_builddir}/ffmpeg-4.4.1-reduced
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 pushd ..
 cp -a ffmpeg-4.4.1-reduced buildavx2
 popd
@@ -114,15 +119,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656549597
+export SOURCE_DATE_EPOCH=1676055504
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
 %configure --disable-static --extra-ldflags='-ldl' \
 --disable-everything \
 --enable-avcodec \
@@ -228,10 +233,10 @@ make  %{?_smp_mflags}
 popd
 unset PKG_CONFIG_PATH
 pushd ../buildavx512/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256 -Wl,-z,x86-64-v4"
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256 -Wl,-z,x86-64-v4"
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256"
-export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=256"
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=512 -Wl,-z,x86-64-v4 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=512 -Wl,-z,x86-64-v4 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=512"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v4 -mprefer-vector-width=512"
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v4"
 %configure --disable-static --extra-ldflags='-ldl' \
 --disable-everything \
@@ -282,11 +287,11 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v4"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1656549597
+export SOURCE_DATE_EPOCH=1676055504
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/not-ffmpeg
-cp %{_builddir}/ffmpeg-4.4.1-reduced/COPYING.LGPLv2.1 %{buildroot}/usr/share/package-licenses/not-ffmpeg/37d2f1d62fec4da0caf06e5da21afc3521b597aa
-cp %{_builddir}/ffmpeg-4.4.1-reduced/COPYING.LGPLv3 %{buildroot}/usr/share/package-licenses/not-ffmpeg/f45ee1c765646813b442ca58de72e20a64a7ddba
+cp %{_builddir}/ffmpeg-4.4.1-reduced/COPYING.LGPLv2.1 %{buildroot}/usr/share/package-licenses/not-ffmpeg/37d2f1d62fec4da0caf06e5da21afc3521b597aa || :
+cp %{_builddir}/ffmpeg-4.4.1-reduced/COPYING.LGPLv3 %{buildroot}/usr/share/package-licenses/not-ffmpeg/f45ee1c765646813b442ca58de72e20a64a7ddba || :
 pushd ../buildavx2/
 %make_install_v3
 popd

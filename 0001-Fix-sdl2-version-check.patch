@@ -1,0 +1,26 @@
+From d1c78639df6292d5bffc67985fd17cfa7dfde55a Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Fri, 10 Feb 2023 10:53:59 -0800
+Subject: [PATCH] Fix sdl2 version check
+
+Signed-off-by: William Douglas <william.douglas@intel.com>
+---
+ configure | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure b/configure
+index 4ba72bf..4dbaa36 100755
+--- a/configure
++++ b/configure
+@@ -6555,7 +6555,7 @@ fi
+ 
+ if enabled sdl2; then
+     SDL2_CONFIG="${cross_prefix}sdl2-config"
+-    test_pkg_config sdl2 "sdl2 >= 2.0.1 sdl2 < 2.1.0" SDL_events.h SDL_PollEvent
++    test_pkg_config sdl2 "sdl2 >= 2.0.1 sdl2 < 3.0.0" SDL_events.h SDL_PollEvent
+     if disabled sdl2 && "${SDL2_CONFIG}" --version > /dev/null 2>&1; then
+         sdl2_cflags=$("${SDL2_CONFIG}" --cflags)
+         sdl2_extralibs=$("${SDL2_CONFIG}" --libs)
+-- 
+2.39.1
+
