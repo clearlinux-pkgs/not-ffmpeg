@@ -5,7 +5,7 @@
 #
 Name     : not-ffmpeg
 Version  : 4.4.1.reduced
-Release  : 69
+Release  : 70
 URL      : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4.1-reduced.tar.xz
 Source0  : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4.1-reduced.tar.xz
 Summary  : No detailed summary available
