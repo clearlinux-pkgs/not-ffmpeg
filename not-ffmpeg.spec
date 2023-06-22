@@ -5,7 +5,7 @@
 #
 Name     : not-ffmpeg
 Version  : 4.4.1.reduced
-Release  : 70
+Release  : 71
 URL      : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4.1-reduced.tar.xz
 Source0  : http://localhost/cgit/projects/ffmpeg/snapshot/ffmpeg-4.4.1-reduced.tar.xz
 Summary  : No detailed summary available
@@ -93,11 +93,11 @@ license components for the not-ffmpeg package.
 %prep
 %setup -q -n ffmpeg-4.4.1-reduced
 cd %{_builddir}/ffmpeg-4.4.1-reduced
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
+%patch -P 3 -p1
+%patch -P 4 -p1
+%patch -P 5 -p1
 pushd ..
 cp -a ffmpeg-4.4.1-reduced buildavx2
 popd
@@ -110,7 +110,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683064109
+export SOURCE_DATE_EPOCH=1687466575
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -278,7 +278,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v4"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1683064109
+export SOURCE_DATE_EPOCH=1687466575
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/not-ffmpeg
 cp %{_builddir}/ffmpeg-4.4.1-reduced/COPYING.LGPLv2.1 %{buildroot}/usr/share/package-licenses/not-ffmpeg/37d2f1d62fec4da0caf06e5da21afc3521b597aa || :
@@ -341,20 +341,6 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libavcodec.so
-/V3/usr/lib64/libavdevice.so
-/V3/usr/lib64/libavfilter.so
-/V3/usr/lib64/libavformat.so
-/V3/usr/lib64/libavutil.so
-/V3/usr/lib64/libswresample.so
-/V3/usr/lib64/libswscale.so
-/V4/usr/lib64/libavcodec.so
-/V4/usr/lib64/libavdevice.so
-/V4/usr/lib64/libavfilter.so
-/V4/usr/lib64/libavformat.so
-/V4/usr/lib64/libavutil.so
-/V4/usr/lib64/libswresample.so
-/V4/usr/lib64/libswscale.so
 /usr/include/libavcodec/ac3_parser.h
 /usr/include/libavcodec/adts_parser.h
 /usr/include/libavcodec/avcodec.h
@@ -496,33 +482,19 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libavcodec.so.58
 /V3/usr/lib64/libavcodec.so.58.134.100
-/V3/usr/lib64/libavdevice.so.58
 /V3/usr/lib64/libavdevice.so.58.13.100
-/V3/usr/lib64/libavfilter.so.7
 /V3/usr/lib64/libavfilter.so.7.110.100
-/V3/usr/lib64/libavformat.so.58
 /V3/usr/lib64/libavformat.so.58.76.100
-/V3/usr/lib64/libavutil.so.56
 /V3/usr/lib64/libavutil.so.56.70.100
-/V3/usr/lib64/libswresample.so.3
 /V3/usr/lib64/libswresample.so.3.9.100
-/V3/usr/lib64/libswscale.so.5
 /V3/usr/lib64/libswscale.so.5.9.100
-/V4/usr/lib64/libavcodec.so.58
 /V4/usr/lib64/libavcodec.so.58.134.100
-/V4/usr/lib64/libavdevice.so.58
 /V4/usr/lib64/libavdevice.so.58.13.100
-/V4/usr/lib64/libavfilter.so.7
 /V4/usr/lib64/libavfilter.so.7.110.100
-/V4/usr/lib64/libavformat.so.58
 /V4/usr/lib64/libavformat.so.58.76.100
-/V4/usr/lib64/libavutil.so.56
 /V4/usr/lib64/libavutil.so.56.70.100
-/V4/usr/lib64/libswresample.so.3
 /V4/usr/lib64/libswresample.so.3.9.100
-/V4/usr/lib64/libswscale.so.5
 /V4/usr/lib64/libswscale.so.5.9.100
 /usr/lib64/libavcodec.so.58
 /usr/lib64/libavcodec.so.58.134.100
