@@ -1,5 +1,5 @@
 PKG_NAME := not-ffmpeg
-URL = $(CGIT_BASE_URL)/projects/ffmpeg/snapshot/ffmpeg-4.4.1-reduced.tar.xz
+URL = https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common

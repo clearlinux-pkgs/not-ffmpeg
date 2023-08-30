@@ -4,3 +4,7 @@ rtmpdump-dev
 gmp-dev
 libass-dev
 libtheora-dev
+nasm
+ladspa_sdk-dev
+xvidcore-dev
+Vulkan-Headers-dev
