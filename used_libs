@@ -6,7 +6,7 @@ libass.so.9
 libbz2.so.1.0
 libc.so.6
 libcairo.so.2
-libdav1d.so.6
+libdav1d.so.7
 libdrm.so.2
 libfontconfig.so.1
 libfreetype.so.6
@@ -22,6 +22,7 @@ libopenjp2.so.7
 libopenmpt.so.0
 libopus.so.0
 libpulse.so.0
+librist.so.4
 librsvg-2.so.2
 libspeex.so.1
 libsrt.so.1.5

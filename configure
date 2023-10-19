@@ -40,3 +40,4 @@
 --enable-version3
 --enable-vulkan
 --disable-asm
+--enable-librist
