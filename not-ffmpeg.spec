@@ -9,7 +9,7 @@
 #
 Name     : not-ffmpeg
 Version  : 6.0
-Release  : 89
+Release  : 90
 URL      : https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz
 Source0  : https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz
 Source1  : https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz.asc
