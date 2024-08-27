@@ -19,6 +19,7 @@
 --enable-libopenmpt
 --enable-libopus
 --enable-libpulse
+--enable-librist
 --enable-librsvg
 --enable-libspeex
 --enable-libsrt
@@ -37,7 +38,7 @@
 --enable-libxvid
 --enable-libzimg
 --enable-shared
+--enable-vapoursynth
 --enable-version3
 --enable-vulkan
 --disable-asm
---enable-librist
