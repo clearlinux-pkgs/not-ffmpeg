@@ -9,7 +9,7 @@
 #
 Name     : not-ffmpeg
 Version  : 6.0
-Release  : 93
+Release  : 94
 URL      : https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz
 Source0  : https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz
 Source1  : https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz.asc
@@ -64,6 +64,7 @@ BuildRequires : xvidcore-dev
 %define __strip /bin/true
 %define debug_package %{nil}
 Patch1: 0001-configure-do-not-die-if-unknown-option-is-found.patch
+Patch2: backport-7945d30e91b96d2f4f5b612048169087d214d41e.patch
 
 %description
 FFmpeg is a collection of libraries and tools to process multimedia content
@@ -135,6 +136,7 @@ grep -E '^\[GNUPG:\] (GOODSIG|EXPKEYSIG) B4322F04D67658D8' gpg.status
 %setup -q -n ffmpeg-6.0
 cd %{_builddir}/ffmpeg-6.0
 %patch -P 1 -p1
+%patch -P 2 -p1
 pushd ..
 cp -a ffmpeg-6.0 buildavx2
 popd
@@ -147,7 +149,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1724778053
+export SOURCE_DATE_EPOCH=1725473753
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -332,7 +334,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1724778053
+export SOURCE_DATE_EPOCH=1725473753
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/not-ffmpeg
 cp %{_builddir}/ffmpeg-%{version}/COPYING.GPLv2 %{buildroot}/usr/share/package-licenses/not-ffmpeg/4cc77b90af91e615a64ae04893fdffa7939db84c || :
