@@ -9,7 +9,7 @@
 #
 Name     : not-ffmpeg
 Version  : 7.1
-Release  : 100
+Release  : 101
 URL      : https://ffmpeg.org/releases/ffmpeg-7.1.tar.gz
 Source0  : https://ffmpeg.org/releases/ffmpeg-7.1.tar.gz
 Source1  : https://github.com/intel/cartwheel-ffmpeg/archive/2024q3/cartwheel-ffmpeg-2024q3.tar.gz
